@@ -2,25 +2,30 @@ import tkinter as tk
 
 root = tk.Tk()
 root.geometry("800x800")
-root.title("Tkinter Example")
+root.title("Minesweeper")
 
 buttonframe = tk.Frame(root)
-
+buttonframe.pack()
 for i in range(20):
     buttonframe.columnconfigure(i, weight=1, minsize=30) 
     buttonframe.rowconfigure(i, weight=1, minsize=30)
 
 
-def on_button_click(row, col):
-    print(f"Button clicked at: ({row}, {col})")
-
+def on_left_click(row, col):
+    print(f"Left click at: ({row}, {col})")
+def on_right_click(row, col):
+    print(f"Right click at: ({row}, {col})")
+    return "break"
 
 for row in range(20):
     for col in range(20):
         button = tk.Button(buttonframe, text=f"({row},{col})", font=('Times New Roman', 8),
                            width=2, height=1,  
-                           command=lambda r=row, c=col: on_button_click(r, c))
-        button.grid(row=row, column=col, sticky="nsew", padx=1, pady=1)  
+                           command=lambda r=row, c=col: on_left_click(r, c))
+        button.grid(row=row, column=col, sticky="nsew", padx=1, pady=1)
+
+        # Bind right-click event properly
+        button.bind("<Button-3>", lambda e, r=row, c=col: on_right_click(e, r, c))
 
 
 buttonframe.pack(fill='both', expand=True)
