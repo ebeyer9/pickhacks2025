@@ -27,13 +27,31 @@ for i in range (-2, 3, 1):
                 b_counter+=1
             grid [row + i] [column + j] = '.'
 
+#Put Bombs Back In
 while(b_counter > 0):
     row = random.randint(0, 19)
     column = random.randint(0, 19)
 
-    if grid [row] [column] == '0':
-        grid [row] [column] = 'b'
+    if grid[row][column] == '0':
+        grid[row][column] = 'b'
         b_counter-=1
+
+#Fill Rest of Grid
+num_counter = 0
+
+for i in range(19):
+    for j in range(19):
+        if grid[i][j] == '.' or grid[i][j] == 'b':
+            continue
+        else:
+            for k in range(-1, 2, 1):
+                for l in range(-1, 2, 1):
+                    if i + k < 0 or j + l < 0 or i + k > 19 or j + l > 19:
+                        continue
+                    elif grid[i+k][j+l]:
+
+
+
 
 #Print Grid
 for row in (grid):
