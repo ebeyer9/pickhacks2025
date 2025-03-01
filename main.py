@@ -12,14 +12,14 @@ root.geometry(f"{size}x{size}+50+50")  # Keeps it a perfect square
 root.title("Minesweeper")
 
 buttonframe = tk.Frame(root)
-# image_path = "images/sackboy.jpg"  # Adjust the path if necessary
-# try:
-#     pil_image = Image.open(image_path)
-#     pil_image = pil_image.resize((50, 50))  # Resize image if necessary
-#     image = ImageTk.PhotoImage(pil_image)
-# except Exception as e:
-#     print(f"Error loading image: {e}")
-#     image = None  # Handle if the image can't be loaded
+image_path = "images/sackboy.jpg"  # Adjust the path if necessary
+try:
+    pil_image = Image.open(image_path)
+    pil_image = pil_image.resize((50, 50))  # Resize image if necessary
+    image = ImageTk.PhotoImage(pil_image)
+except Exception as e:
+    print(f"Error loading image: {e}")
+    image = None  # Handle if the image can't be loaded
 
 # Configure the grid for buttons
 for i in range(20):
@@ -70,7 +70,5 @@ for row in range(20):
         button[row][col].bind("<Button-2>", lambda e, r=row, c=col: on_right_click(e, r, c))  
 
 buttonframe.pack(fill='both', expand=True)
-
-db.generate_board()
 
 root.mainloop()
