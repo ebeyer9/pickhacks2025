@@ -1,6 +1,7 @@
 import random
 
 grid = [['0']*20 for i in range (20)]
+display_grid = [['N']*20 for i in range (20)]
 
 #Randomly Generate Bomb Tiles
 bomb_num = 150
@@ -39,8 +40,8 @@ while(b_counter > 0):
 #Fill Rest of Grid
 num_counter = 0
 
-for i in range(19):
-    for j in range(19):
+for i in range(20):
+    for j in range(20):
         if grid[i][j] == '.' or grid[i][j] == 'b':
             continue
         else:
@@ -48,13 +49,28 @@ for i in range(19):
                 for l in range(-1, 2, 1):
                     if i + k < 0 or j + l < 0 or i + k > 19 or j + l > 19:
                         continue
-                    elif grid[i+k][j+l]:
+                    elif grid[i+k][j+l] == 'b':
+                        num_counter+=1
+                    else:
+                        continue
+
+            if num_counter == 0:
+                grid[i][j] = '.'
+            else:
+                grid[i][j] = num_counter
+            num_counter = 0
+    
+
+
 
 
 
 
 #Print Grid
-for row in (grid):
-    for column in (row):
-        print(column, end = " ")
+for i in range(20):
+    for j in range(20):
+        if display_grid[i][j] == 'N':
+            print('$', end = " ")
+        else:
+            print(grid[i][j], end = " ")
     print()
