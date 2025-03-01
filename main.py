@@ -19,6 +19,14 @@ try:
 except Exception as e:
     print(f"Error loading image: {e}")
     image = None  # Handle if the image can't be loaded
+new_image = "images/shid.jpg"  # Adjust the path if necessary
+try:
+    pil_image2 = Image.open(new_image)
+    pil_image2 = pil_image.resize((50, 50))  # Resize image if necessary
+    image = ImageTk.PhotoImage(pil_image2)
+except Exception as e:
+    print(f"Error loading image: {e}")
+    image = None  # Handle if the image can't be loaded
 
 # Configure the grid for buttons
 for i in range(20):
@@ -49,5 +57,5 @@ for row in range(20):
         button.bind("<Button-2>", lambda e, r=row, c=col: on_right_click(e, r, c))  
 
 buttonframe.pack(fill='both', expand=True)
-
+buttonframe.grid_slaves(row=9, column=9)[0].config(image=new_image)
 root.mainloop()
