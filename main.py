@@ -5,7 +5,7 @@ root.geometry("800x800")
 root.title("Minesweeper")
 
 buttonframe = tk.Frame(root)
-buttonframe.pack()
+
 for i in range(20):
     buttonframe.columnconfigure(i, weight=1, minsize=30) 
     buttonframe.rowconfigure(i, weight=1, minsize=30)
@@ -13,7 +13,7 @@ for i in range(20):
 
 def on_left_click(row, col):
     print(f"Left click at: ({row}, {col})")
-def on_right_click(row, col):
+def on_right_click(event, row, col):
     print(f"Right click at: ({row}, {col})")
     return "break"
 
@@ -25,9 +25,11 @@ for row in range(20):
         button.grid(row=row, column=col, sticky="nsew", padx=1, pady=1)
 
         # Bind right-click event properly
-        button.bind("<Button-3>", lambda e, r=row, c=col: on_right_click(e, r, c))
+        button.bind("<Button-3>", lambda e, r=row, c=col: on_right_click(e, r, c))  # Windows/Linux
+        button.bind("<Button-2>", lambda e, r=row, c=col: on_right_click(e, r, c))  # MacOS
 
 
+buttonframe.pack()
 buttonframe.pack(fill='both', expand=True)
 
 root.mainloop()
