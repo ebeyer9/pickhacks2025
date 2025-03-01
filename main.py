@@ -1,39 +1,46 @@
 import tkinter as tk
+from tkinter import PhotoImage
 
 root = tk.Tk()
-height= root.winfo_screenwidth()
-width= root.winfo_screenheight()
-root.geometry('%dx%d+0+0' % (width,height))
+
+# Set the window to be a square based on the smallest screen dimension
+height = root.winfo_screenwidth()
+width = root.winfo_screenheight()
+size = min(width, height)
+root.geometry(f"{size}x{size}+50+50")  # Keeps it a perfect square
 root.title("Minesweeper")
 
 buttonframe = tk.Frame(root)
+image = PhotoImage(file="images/download.png")
 
+# Configure the grid for buttons
 for i in range(20):
-    buttonframe.columnconfigure(i, weight=1, minsize=30) 
+    buttonframe.columnconfigure(i, weight=1, minsize=30)
     buttonframe.rowconfigure(i, weight=1, minsize=30)
 
+def first_click(event, row, col, button):
+    if getattr(button, "first_click", True):  
+        print(f"Initial click at: ({row}, {col})")
+        button.first_click = False  
+        return "break"  
 
-def on_left_click(row, col):
-    print(f"Left click at: ({row}, {col})")
+
 def on_right_click(event, row, col):
-    print(f"Right click at: ({row}, {col})")
+    print(f"Place flag at: ({row}, {col})")
     return "break"
 
 for row in range(20):
     for col in range(20):
-        button = tk.Button(buttonframe, text=f"({row},{col})", font=('Times New Roman', 8),
-                           width=2, height=1,  
-                           command=lambda r=row, c=col: on_left_click(r, c))
+        button = tk.Button(buttonframe, image=image, font=('Times New Roman', 8))
         button.grid(row=row, column=col, sticky="nsew", padx=1, pady=1)
 
-        # Bind right-click event properly
-        button.bind("<Button-3>", lambda e, r=row, c=col: on_right_click(e, r, c))  # Windows/Linux
-        button.bind("<Button-2>", lambda e, r=row, c=col: on_right_click(e, r, c))  # MacOS
+        button.first_click = True  
 
+        button.bind("<Button-1>", lambda e, r=row, c=col, b=button: first_click(e, r, c, b)) 
 
-buttonframe.pack()
+        button.bind("<Button-3>", lambda e, r=row, c=col: on_right_click(e, r, c))  # Right click (place flag)
+        button.bind("<Button-2>", lambda e, r=row, c=col: on_right_click(e, r, c))  
+
 buttonframe.pack(fill='both', expand=True)
 
 root.mainloop()
-
-#poop
