@@ -1,7 +1,9 @@
 import tkinter as tk
 
 root = tk.Tk()
-root.geometry("800x800")
+height= root.winfo_screenwidth()
+width= root.winfo_screenheight()
+root.geometry('%dx%d+0+0' % (width,height))
 root.title("Minesweeper")
 
 buttonframe = tk.Frame(root)
