@@ -16,7 +16,7 @@ def generate_board():
             grid [row] [column] = 'b'
             bomb_num-=1
 
-def first_click(row, column):
+def break_board(row, column):
     #Exterminate Starting Point
     b_counter = 0
 
@@ -108,6 +108,11 @@ def click(r, c):
         display_grid[r][c] == 'Y'
         unveil()
 
+def return_symbol(r, c):
+    if display_grid[r][c] == 'N':
+        return 'N'
+    else:
+        return [r][c]
 
 
 def print_board():
@@ -119,12 +124,10 @@ def print_board():
                 print(grid[i][j], end = " ")
         print()
 
-generate_board()
-first_click(5,5)
-print_board()
+# print_board()
 
-print()
-for i in range(20):
-    for j in range(20):
-        print(grid[i][j], end = " ")
-    print()
+# print()
+# for i in range(20):
+#     for j in range(20):
+#         print(grid[i][j], end = " ")
+#     print()
