@@ -140,7 +140,7 @@ def update_images():
             elif symbol == 'b':  
                 button[i][j].config(image=image2)
                 button[i][j].image = image2  
-                show_popup_with_image ("images/lose.jpg") 
+                show_popup_with_image ("images/lose.jpeg") 
 
             elif symbol in number_images and number_images[symbol] is not None:  
                 button[i][j].config(image=number_images[symbol])  
