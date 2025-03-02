@@ -116,6 +116,19 @@ def return_symbol(r, c):
     else:
         return grid[r][c]
 
+def check_win():
+    counter = 0
+    for i in range(20):
+        for j in range(20):
+            if display_grid[i][j] == 'b' or display_grid[i][j] == 'N':
+                counter = counter + 1
+    print("Counter")
+    print(counter)
+    if counter == 100:
+        return True
+    else:
+        return False
+
 
 def print_board():
     for i in range(20):

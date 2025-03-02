@@ -2,6 +2,7 @@ import da_bomb as db
 import tkinter as tk
 from PIL import Image, ImageTk
 
+
 root = tk.Tk()
 
 
@@ -13,17 +14,12 @@ root.title("Minesweeper")
 
 buttonframe = tk.Frame(root)
 def show_popup_with_image(image_path):
-    popup = tk.Toplevel()  # Create a new top-level window
-    popup.title("Bomb Hit!")
+    
     
     try:
         pil_image = Image.open(image_path)
-        pil_image = pil_image.resize((width, height))  # Resize to fit the popup
-        popup.image_ref = ImageTk.PhotoImage(pil_image) 
-
-        label = tk.Label(popup, image=popup.image_ref)  # Keep a reference to the image
-        label.pack()
-        print("popupimage loaded successfully")
+        pil_image.show()
+        
 
     except Exception as e:
         print(f"Error loading image: {e}")
@@ -102,6 +98,10 @@ def player_click(event, row, col, button):
                 update_images()
                 print(db.grid[row][col])
                 db.print_board()
+                if db.check_win() == True:
+                    show_popup_with_image("images/win.png")
+
+
             
 
 
@@ -129,7 +129,6 @@ def update_images():
         for j in range(20):
             symbol = str(db.return_symbol(i, j))
             if getattr(button[i][j], 'image', None) == image3: 
-                print(f"Skipping update at ({i}, {j}) because it's flagged")
                 continue
             elif symbol == 'N':
                 button[i][j].config(image=image)
@@ -140,7 +139,7 @@ def update_images():
             elif symbol == 'b':  
                 button[i][j].config(image=image2)
                 button[i][j].image = image2  
-                show_popup_with_image ("images/lose.jpeg") 
+                show_popup_with_image ("images/lose.jpg") 
 
             elif symbol in number_images and number_images[symbol] is not None:  
                 button[i][j].config(image=number_images[symbol])  
