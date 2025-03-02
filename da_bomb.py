@@ -102,17 +102,19 @@ def unveil():
                                 continue
 
 def click(r, c):
+    global display_grid
     if grid[r][c] == 'b':
+        display_grid[r][c] = 'Y'
         print("You Fucking Suck")
     else:
-        display_grid[r][c] == 'Y'
+        display_grid[r][c] = 'Y'
         unveil()
 
 def return_symbol(r, c):
     if display_grid[r][c] == 'N':
         return 'N'
     else:
-        return [r][c]
+        return grid[r][c]
 
 
 def print_board():

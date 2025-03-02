@@ -11,7 +11,7 @@ root.geometry(f"{size}x{size}+50+50")  # Keeps it a perfect square
 root.title("Minesweeper")
 
 buttonframe = tk.Frame(root)
-image_path = "images/sackboy.jpg"  # Adjust the path if necessary
+image_path = "images/edwin.jpg"  # Adjust the path if necessary
 try:
     pil_image = Image.open(image_path)
     pil_image = pil_image.resize((50, 50))  # Resize image if necessary
@@ -20,9 +20,9 @@ except Exception as e:
     print(f"Error loading image1: {e}")
     image = None  # Handle if the image can't be loaded
 
-discovered = "images/shid.jpg"  # Adjust the path if necessary
+bomb = "images/G.jpg"  # Adjust the path if necessary
 try:
-    pil_image2 = Image.open(discovered)
+    pil_image2 = Image.open(bomb)
     pil_image2 = pil_image2.resize((50, 50))  # Resize image if necessary
     image2 = ImageTk.PhotoImage(pil_image2)
     print("Image2 loaded successfully")
@@ -30,7 +30,7 @@ except Exception as e:
     print(f"Error loading image2: {e}")
     image2 = None 
 
-flag = "images/download.jpg"  # Adjust the path if necessary
+flag = "images/poopfart_Artwork.jpg"  # Adjust the path if necessary
 try:
     pil_image3 = Image.open(flag)
     pil_image3 = pil_image3.resize((50, 50))  # Resize image if necessary
@@ -76,6 +76,7 @@ for row in range(20):
         button.bind("<Button-1>", lambda e, r=row, c=col, b=button: first_click(e, r, c, b)) 
 
         button.bind("<Button-2>", lambda e, r=row, c=col, b=button: on_right_click(e, r, c, b))
+
         button.bind("<Button-3>", lambda e, r=row, c=col, b=button: on_right_click(e, r, c, b))
  
 
